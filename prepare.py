@@ -16,6 +16,10 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
+# imports from files
+import acquire
+import prepare
+
 # ignore the warnings
 import warnings
 warnings.filterwarnings("ignore")
@@ -27,8 +31,14 @@ np.set_printoptions(suppress=True)
 pd.options.display.float_format = '{:,.2f}'.format 
 #%precision %.2f
 
-# imports
-import acquire
+# evaluating/modeling methods
+import math
+from math import sqrt
+from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
+from sklearn.feature_selection import SelectKBest, f_regression
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LinearRegression, LassoLars, TweedieRegressor
+from sklearn.preprocessing import PolynomialFeatures
 
 ###############prepare#################
 
@@ -276,3 +286,56 @@ def create_scatter_plot(x,y,df,kmeans, X_scaled, scaler):
     sns.scatterplot(x = x, y = y, data = df, hue = 'cluster')
     centroids = pd.DataFrame(scaler.inverse_transform(kmeans.cluster_centers_), columns=X_scaled.columns)
     centroids.plot.scatter(y=y, x= x, ax=plt.gca(), alpha=.30, s=500, c='black')
+
+    
+    
+################functions from KS's regression project################
+
+# defines function to clean zillow data and return as a cleaned pandas DataFrame
+def clean_zillow(df):
+    '''
+    clean_zillow will take one argument df, a pandas dataframe and will:
+    drop null values,
+    return: a single pandas dataframe with the above operations performed
+    '''
+
+    #drop the nulls
+    df = df.fillna(0)
+
+
+    return df
+
+
+# splits a dataframe into train, validate, test 
+def splits(df):
+    '''
+    take in a DataFrame and return train, validate, and test DataFrames.
+    return train, validate, test DataFrames.
+    '''
+    train_validate, test = train_test_split(df, test_size=.2, random_state=123)
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123)
+    return train, validate, test
+
+
+
+
+# defines MinMaxScaler() and returns scaled data
+def Min_Max_Scaler(X_train, X_validate, X_test):
+    """
+    Takes in X_train, X_validate and X_test dfs with numeric values only
+    makes, fits, and uses/transforms the data,
+    
+    Returns X_train_scaled, X_validate_scaled, X_test_scaled dfs 
+    """
+
+    #make and fit
+    scaler_2 = MinMaxScaler().fit(X_train)
+
+    #use and turn numpy arrays into dataframes
+    X_train_scaled = pd.DataFrame(scaler_2.transform(X_train), index = X_train.index, columns = X_train.columns)
+    X_validate_scaled = pd.DataFrame(scaler_2.transform(X_validate), index = X_validate.index, columns = X_validate.columns)
+    X_test_scaled = pd.DataFrame(scaler_2.transform(X_test), index = X_test.index, columns = X_test.columns)
+    
+    return X_train_scaled, X_validate_scaled, X_test_scaled
