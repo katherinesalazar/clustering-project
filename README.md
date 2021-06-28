@@ -6,12 +6,11 @@ The Zillow Data Science Team wants to understand what is driving the errors in t
 
 ![alt text](put zillow objectives here)
 ![alt text](put executive summary here)
+
 # Project Planning
 - Refer to trello kanban board for planning overview: https://trello.com/b/aM5Pet9d/zillow-clustering-project
 - Utilized agile program management methodology 
 # Initial Ideas
-<br /> 
-<br /> 
 - The Zillow Data Science team would like to know:
     - **What is driving the errors (logerror) Zestimate in single unit properties?**
 
@@ -25,8 +24,8 @@ The Zillow Data Science Team wants to understand what is driving the errors in t
 <br /> 
 
 **Hypothesis:**
-- $H$0 There is not a correlation between zestimate logerror with the following features: bathroomcnt, bedroomcnt and calculatedfinishedsquarefeet.
-- $H$A There a correlation between between zestimate logerror with the following features: bathroomcnt, bedroomcnt and calculatedfinishedsquarefeet.
+- H0: There is not a correlation between zestimate logerror with the following features: bathroomcnt, bedroomcnt and calculatedfinishedsquarefeet.
+- HA: There a correlation between between zestimate logerror with the following features: bathroomcnt, bedroomcnt and calculatedfinishedsquarefeet.
 
 
 # Data Dictionary
