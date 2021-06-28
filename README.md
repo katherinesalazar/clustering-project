@@ -4,8 +4,8 @@ The Zillow Data Science Team wants to understand what is driving the errors in t
     - 2017 properties
     - Single units / Single family homes
 
-![alt text](put zillow objectives here)
-![alt text](put executive summary here)
+![alt text](https://github.com/katherinesalazar/visuals/blob/main/clustering_project_goals.png)
+![alt text](https://github.com/katherinesalazar/visuals/blob/main/clustering_exec_summ.png)
 
 # Project Planning
 - Refer to trello kanban board for planning overview: https://trello.com/b/aM5Pet9d/zillow-clustering-project
